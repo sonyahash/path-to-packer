@@ -60,9 +60,9 @@ build {
 
   provisioner "shell" {
     inline = [
-      "sudo yum -y install amazon-linux-extras",
+      "sudo amazon-linux-extras install",
       "sudo amazon-linux-extras enable nginx1.12",
-      "sudo yum -y install nginx",
+      "sudo nginx install",
       "sudo systemctl start nginx"
     ]
   }
