@@ -9,7 +9,7 @@ variable "cidr_subnet" {
 
 variable "environment_tag" {
   description = "Environment tag"
-  default     = "HashiCups Frontend Development"
+  default     = "Path to Packer Frontend Development"
 }
 
 variable "region" {
@@ -19,12 +19,12 @@ variable "region" {
 
 variable "hcp_bucket_ubuntu" {
   description = "The Bucket where our AMI is listed."
-  default     = "hashicups-frontend-ubuntu"
+  default     = "path-to-packer-frontend-ubuntu"
 }
 
 variable "hcp_channel" {
   description = "HCP Packer channel name"
-  default     = "hashicups-development"
+  default     = "path-to-packer-development"
 }
 
 
