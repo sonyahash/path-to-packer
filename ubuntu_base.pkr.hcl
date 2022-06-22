@@ -58,24 +58,32 @@ build {
     ]
   }
 
-  provisioner "shell" {
+provisioner "shell" {
     inline = [
-      # use nginx=development for latest development version
-      "sudo -s",
-      "nginx=stable",
-      "add-apt-repository ppa:nginx/$nginx",
-      "apt update",
-      "apt install nginx",
-      "sudo systemctl status nginx",
-      "sudo systemctl start nginx",
-      "sudo systemctl enable nginx",
+   "sudo amazon-linux-extras enable nginx1.12",
+   "sudo yum -y install nginx",
+   "sudo systemctl start nginx"
+  ]
+ }
 
-      #Allow NGINX traffic and grant access to the firewall
-      "sudo ufw app list",
-      "sudo ufw allow 'nginx full'",
-      "sudo ufw reload"
-    ]
-  }
+  #provisioner "shell" {
+  # inline = [
+  #   # use nginx=development for latest development version
+  #    "sudo -s",
+  #    "nginx=stable",
+  #    "add-apt-repository ppa:nginx/$nginx",
+  #    "apt update",
+  #    "apt install nginx",
+  #    "sudo systemctl status nginx",
+  #    "sudo systemctl start nginx",
+  #    "sudo systemctl enable nginx",
+  #
+  #    #Allow NGINX traffic and grant access to the firewall
+  #    "sudo ufw app list",
+  #    "sudo ufw allow 'nginx full'",
+  #    "sudo ufw reload"
+  #  ]
+  # }
 
   # provisioner "shell" {
   #   inline = [
