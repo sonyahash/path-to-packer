@@ -58,9 +58,9 @@ build {
     ]
   }
 
-  provisioner “shell” {
+  provisioner "shell" {
     inline = [
-      # use nginx=development for latest development version
+      # use nginx=development for latest development version 
       “sudo -s”,
       “nginx=stable”,
       “add-apt-repository ppa:nginx/$nginx”,
@@ -69,6 +69,7 @@ build {
       “sudo systemctl status nginx”,
       “sudo systemctl start nginx”,
       “sudo systemctl enable nginx”,
+
       #Allow NGINX traffic and grant access to the firewall
       “sudo ufw app list”,
       “sudo ufw allow ‘nginx full’“,
