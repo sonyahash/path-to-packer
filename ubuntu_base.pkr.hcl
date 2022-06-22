@@ -60,9 +60,10 @@ build {
 
   provisioner "shell" {
     inline = [
-      "sudo amazon-linux-extras enable nginx20.04",
-      "sudo yum -y install nginx",
-      "sudo systemctl start nginx"
+      "sudo apt-get update",
+      "sudo apt-get install nginx",
+      "sudo systemctl start nginx",
+      "sudo systemctl enable nginx"
       // # use nginx=development for latest development version 
       // "sudo -s",
       // "nginx=stable",
