@@ -58,13 +58,14 @@ build {
     ]
   }
 
-provisioner "shell" {
+  provisioner "shell" {
     inline = [
-   "sudo amazon-linux-extras enable nginx1.12",
-   "sudo yum -y install nginx",
-   "sudo systemctl start nginx"
-  ]
- }
+      "sudo yum -y install amazon-linux-extras",
+      "sudo amazon-linux-extras enable nginx1.12",
+      "sudo yum -y install nginx",
+      "sudo systemctl start nginx"
+    ]
+  }
 
   #provisioner "shell" {
   # inline = [
