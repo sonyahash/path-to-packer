@@ -3,7 +3,7 @@ terraform {
 
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.26.0"
+      version = "~> 4.16"
     }
 
     hcp = {
@@ -37,7 +37,7 @@ resource "aws_instance" "path-to-packer_frontend" {
   ami                         = data.hcp_packer_image.ubuntu.cloud_image_id
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.subnet_public.id
-  vpc_security_group_ids      = [aws_security_group.sg_22_80.id]
+  vpc_security_group_ids      = [aws_security_group.sg_22_80_443.id]
   associate_public_ip_address = true
 
   tags = {
