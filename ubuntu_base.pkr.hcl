@@ -60,28 +60,12 @@ build {
 
   provisioner "shell" {
     inline = [
-      "sudo amazon-linux-extras install",
-      "sudo amazon-linux-extras enable nginx1.12",
-      "sudo nginx install",
-      "sudo systemctl start nginx"
-      // "sudo apt-get update",
-      // "sudo apt-get install nginx",
-      // "sudo systemctl start nginx",
-      // "sudo systemctl enable nginx"
-      // # use nginx=development for latest development version 
-      // "sudo -s",
-      // "nginx=stable",
-      // "add-apt-repository ppa:nginx/$nginx",
-      // "apt update",
-      // "apt install nginx",
-      // "sudo systemctl status nginx",
-      // "sudo systemctl start nginx",
-      // "sudo systemctl enable nginx",
-
-      // #Allow NGINX traffic and grant access to the firewall
-      // "sudo ufw app list",
-      // "sudo ufw allow 'nginx full'",
-      // "sudo ufw reload"
+      "sleep 30",
+      "sudo apt-get update",
+      "sudo apt-get upgrade -y",
+      "sudo apt-get install -y nginx",
+      "sudo systemctl start nginx",
+      "sudo apt-get install tree"
     ]
   }
 
