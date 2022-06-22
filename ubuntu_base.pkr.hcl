@@ -60,10 +60,12 @@ build {
 
   provisioner "shell" {
     inline = [
-      "sudo amazon-linux-extras install",
-      "sudo amazon-linux-extras enable nginx1.12",
-      "sudo nginx install",
-      "sudo systemctl start nginx"
+      "sleep 30",
+      "sudo apt-get update",
+      "sudo apt-get upgrade -y",
+      "sudo apt-get install -y nginx",
+      "sudo systemctl start nginx",
+      "sudo apt-get install tree"
     ]
   }
 
