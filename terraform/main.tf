@@ -33,7 +33,7 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_instance" "hashicups_frontend" {
+resource "aws_instance" "path-to-packer_frontend" {
   ami                         = data.hcp_packer_image.ubuntu.cloud_image_id
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.subnet_public.id
@@ -41,7 +41,7 @@ resource "aws_instance" "hashicups_frontend" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "hashicups-frontend"
+    Name = "path-to-packer-frontend"
   }
 }
 
@@ -74,8 +74,8 @@ resource "aws_route_table_association" "rta_subnet_public" {
   route_table_id = aws_route_table.rtb_public.id
 }
 
-resource "aws_security_group" "sg_22_80" {
-  name   = "sg_22_80"
+resource "aws_security_group" "sg_22_80_443" {
+  name   = "sg_22_80_443"
   vpc_id = aws_vpc.vpc.id
 
   # SSH access from the VPC
@@ -93,6 +93,13 @@ resource "aws_security_group" "sg_22_80" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -102,5 +109,5 @@ resource "aws_security_group" "sg_22_80" {
 }
 
 output "app_url" {
-  value = "http://${aws_instance.hashicups_frontend.public_ip}"
+  value = "http://${aws_instance.path-to-packer_frontend.public_ip}"
 }
