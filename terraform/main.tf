@@ -40,7 +40,7 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_instance" "path-to-packer_frontend1" {
+resource "aws_instance" "path-to-packer_frontend" {
   ami                         = data.hcp_packer_image.ubuntu.cloud_image_id
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.subnet_public.id
@@ -48,7 +48,7 @@ resource "aws_instance" "path-to-packer_frontend1" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "path-to-packer-frontend-1"
+    Name = "path-to-packer-frontend"
   }
 }
 
