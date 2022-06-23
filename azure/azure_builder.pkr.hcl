@@ -3,10 +3,10 @@ source "azure-arm" "ubuntu" {
     dept = "Engineering"
     task = "Image deployment"
   }
-  subscription_id                   = "<subscription_id "
+  subscription_id                   = "<subscription_id>"
   client_id                         = "<client_id>"
-  client_secret                     = "client_secret>"
-  tenant_id                         = "tenant_id"
+  client_secret                     = "<client_secret>"
+  tenant_id                         = "<tenant_id>"
   image_offer                       = "UbuntuServer"
   image_publisher                   = "Canonical"
   image_sku                         = "16.04-LTS"
