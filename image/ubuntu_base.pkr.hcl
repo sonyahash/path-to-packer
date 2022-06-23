@@ -46,7 +46,7 @@ build {
   ## HashiCups
   # Add startup script that will run path to packer on instance boot
   provisioner "file" {
-    source      = "setup-deps-path-to-packer.sh"
+    source      = "../scripts/setup-deps-path-to-packer.sh"
     destination = "/tmp/setup-deps-path-to-packer.sh"
   }
 
@@ -68,12 +68,4 @@ build {
       "sudo apt-get install tree"
     ]
   }
-
-  # provisioner "shell" {
-  #   inline = [
-  #     "echo '***** Running CIS LTS Benchmark tests'",
-  #     "echo '1.1.1.3 Ensure mounting of jffs2 filesystems is disabled'",
-  #     "modprobe -n -v jffs2 | grep -E '(jffs2|install)'"
-  #   ]
-  # }
 }
