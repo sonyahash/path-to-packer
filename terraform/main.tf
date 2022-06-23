@@ -48,7 +48,8 @@ resource "aws_instance" "path-to-packer_frontend" {
   associate_public_ip_address = true
 
   tags = {
-    Name = "path-to-packer-frontend"
+    Name = "path-to-packer-frontend-1
+    "
   }
 }
 
