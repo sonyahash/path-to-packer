@@ -13,6 +13,13 @@ terraform {
 
   }
   required_version = ">= 0.14.5"
+
+  cloud {
+    organization = "hashicorp-jennawong"
+    workspaces {
+      tags = ["path-to-packer"]
+    }
+  }
 }
 
 provider "hcp" {}
