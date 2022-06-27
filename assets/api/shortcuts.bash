@@ -4,8 +4,8 @@
 export HCP_PACKER_BASE_URL=https://api.cloud.hashicorp.com/packer/2021-04-30/organizations/${HCP_ORGANIZATION_ID}/projects/${HCP_PROJECT_ID}
 
 # Specific to this exercise
-export HCP_PACKER_BUCKET_SLUG="hashicups-frontend-ubuntu"
-export HCP_PACKER_CHANNEL_SLUG="hashicups-development"
+export HCP_PACKER_BUCKET_SLUG="path-to-packer-frontend-ubuntu"
+export HCP_PACKER_CHANNEL_SLUG="path-to-packer-development"
 
 export HCP_PACKER_API_GET_REGISTRY=${HCP_PACKER_BASE_URL}/registry
 export HCP_PACKER_API_CREATE_CHANNEL=${HCP_PACKER_BASE_URL}/images/${HCP_PACKER_BUCKET_SLUG}/channels
