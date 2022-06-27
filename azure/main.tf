@@ -10,7 +10,7 @@ provider "azurerm" {
 
 # Locate the existing resource group
 data "azurerm_resource_group" "main" {
-  name = "myResourceGroup"
+  name = "path-to-packer"
 }
 
 output "id" {
@@ -20,7 +20,7 @@ output "id" {
 # Locate the existing custom image
 data "azurerm_image" "main" {
   name                = "myPackerImage"
-  resource_group_name = "myResourceGroup"
+  resource_group_name = "path-to-packer"
 }
 
 output "image_id" {
