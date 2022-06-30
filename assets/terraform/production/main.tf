@@ -45,6 +45,7 @@ resource "aws_instance" "path-to-packer_frontend" {
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.subnet_public.id
   vpc_security_group_ids      = [aws_security_group.sg_22_80_443.id]
+  key_name                    = aws_key_pair.path-to-packer.key_name
   associate_public_ip_address = true
   user_data                   = templatefile("${path.module}/config.tftpl", {name = var.user_name})
 
