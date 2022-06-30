@@ -51,6 +51,11 @@ resource "aws_instance" "path-to-packer_frontend" {
   tags = {
     Name = "path-to-packer-frontend"
   }
+
+  provisioner "file" {
+    source = "../nginx/index.html"
+    destination = "/tmp/index.html"
+  }
 }
 
 resource "aws_vpc" "vpc" {
@@ -121,7 +126,4 @@ output "app_url" {
 }
 
 
-  provisioner "file" {
-    source = "../nginx/index.html"
-    destination = "/tmp/index.html"
-  }
+  
