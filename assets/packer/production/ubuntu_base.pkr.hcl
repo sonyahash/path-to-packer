@@ -69,22 +69,22 @@ build {
     ]
   }
 
-   provisioner "shell" {
+  provisioner "shell" {
     inline = [
       //sudo useradd -m -s /bin/bash ${name}
+      "sudo su"
+      "cd /etc/nginx/sites-enabled",
+      "unlink default",
+      "cd ../",
 
-      "sudo cd /etc/nginx/sites-enabled", 
-      "sudo unlink default",
-      "sudo cd ../",
+      "cd /var/www/",
 
-      "sudo cd /var/www/",
+      "mkdir packer.local",
+      "cd packer.local",
 
-      "sudo mkdir packer.local",
-      "sudo cd packer.local",
+      "mv /tmp/index.html /var/www/packer.local/",
 
-      "sudo mv /tmp/index.html /var/www/packer.local/",
-
-      "sudo systemctl reload nginx" 
+      "systemctl reload nginx"
     ]
   }
 }
