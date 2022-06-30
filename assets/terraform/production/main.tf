@@ -55,7 +55,27 @@ resource "aws_instance" "path-to-packer_frontend" {
   provisioner "file" {
     source = "./index.html"
     destination = "/tmp/index.html"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = tls_private_key.path2packer.private_key_pem
+      host        = aws_instance.path-to-packer_frontend.public_ip
+    }
   }
+}
+
+resource "tls_private_key" "path2packer" {
+  algorithm = "RSA"
+}
+
+locals {
+  private_key_filename = "packer-ssh-key.pem"
+}
+
+resource "aws_key_pair" "path-to-packer" {
+  key_name   = local.private_key_filename
+  public_key = tls_private_key.path2packer.public_key_openssh
 }
 
 resource "aws_vpc" "vpc" {
