@@ -69,22 +69,21 @@ build {
     ]
   }
 
-  // provisioner "shell" {
-  //   inline = [
-  //     //sudo useradd -m -s /bin/bash ${name}
-  //     "sudo su",
-  //     "cd /etc/nginx/sites-enabled",
-  //     "unlink default",
-  //     "cd ../",
+  provisioner "shell" {
+    inline = [
+      "sudo su -",
+      "cd /etc/nginx/sites-enabled",
+      "unlink default",
+      "cd ../",
 
-  //     "cd /var/www/",
+      "cd /var/www/",
 
-  //     "mkdir packer.local",
-  //     "cd packer.local",
+      "mkdir packer.local",
+      "cd packer.local",
 
-  //     "mv /tmp/index.html /var/www/packer.local/",
+      "mv /tmp/index.html /var/www/packer.local/",
 
-  //     "systemctl reload nginx"
-  //   ]
-  // }
+      "systemctl reload nginx"
+    ]
+  }
 }
