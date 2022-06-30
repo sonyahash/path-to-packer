@@ -46,7 +46,7 @@ resource "aws_instance" "path-to-packer_frontend" {
   subnet_id                   = aws_subnet.subnet_public.id
   vpc_security_group_ids      = [aws_security_group.sg_22_80_443.id]
   associate_public_ip_address = true
-  user_data                   = templatefile("${nginx}/config.tftpl", {name = var.user_name})
+  //user_data                   = templatefile("config.tftpl", {name = var.user_name})
 
   tags = {
     Name = "path-to-packer-frontend"
@@ -56,6 +56,25 @@ resource "aws_instance" "path-to-packer_frontend" {
     source = "../nginx/index.html"
     destination = "/tmp/index.html"
   }
+
+  provisioner "shell" {
+  inline = [
+    //sudo useradd -m -s /bin/bash ${name}
+
+    "sudo cd /etc/nginx/sites-enabled", 
+    "sudo unlink default",
+    "sudo cd ../",
+
+    "sudo cd /var/www/",
+
+    "sudo mkdir packer.local",
+    "sudo cd packer.local",
+
+    "sudo mv /tmp/index.html /var/www/packer.local/",
+
+    "sudo systemctl reload nginx" 
+  ]
+}
 }
 
 resource "aws_vpc" "vpc" {
@@ -126,4 +145,3 @@ output "app_url" {
 }
 
 
-  
