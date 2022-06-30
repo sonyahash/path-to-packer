@@ -46,7 +46,7 @@ resource "aws_instance" "path-to-packer_frontend" {
   subnet_id                   = aws_subnet.subnet_public.id
   vpc_security_group_ids      = [aws_security_group.sg_22_80_443.id]
   associate_public_ip_address = true
-  user_data                   = templatefile("config.tftpl", { name = var.user_name})
+  user_data                   = templatefile("../nginx/config.tftpl", { name = var.user_name})
 
   tags = {
     Name = "path-to-packer-frontend"
