@@ -53,7 +53,7 @@ resource "aws_instance" "path-to-packer_frontend" {
   }
 
   provisioner "file" {
-    source = "index.html"
+    source = "./index.html"
     destination = "/tmp/index.html"
   }
 }
