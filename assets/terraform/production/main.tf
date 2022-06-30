@@ -46,6 +46,7 @@ resource "aws_instance" "path-to-packer_frontend" {
   subnet_id                   = aws_subnet.subnet_public.id
   vpc_security_group_ids      = [aws_security_group.sg_22_80_443.id]
   associate_public_ip_address = true
+  user_data                   = templatefile("config.tftpl")
 
   tags = {
     Name = "path-to-packer-frontend"
@@ -118,3 +119,9 @@ resource "aws_security_group" "sg_22_80_443" {
 output "app_url" {
   value = "http://${aws_instance.path-to-packer_frontend.public_ip}"
 }
+
+
+  provisioner "file" {
+    source = "../nginx/index.html"
+    destination = "/tmp/index.html"
+  }
