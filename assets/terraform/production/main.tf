@@ -47,11 +47,25 @@ resource "aws_instance" "path-to-packer_frontend" {
   vpc_security_group_ids      = [aws_security_group.sg_22_80_443.id]
   key_name                    = aws_key_pair.path-to-packer.key_name
   associate_public_ip_address = true
-  user_data                   = templatefile("${path.module}/config.tftpl", {name = var.user_name})
+  user_data                   = << EOF 
+                                #!/bin/bash
 
-  tags = {
-    Name = "path-to-packer-frontend"
-  }
+                                sudo cd /etc/nginx/sites-enabled 
+                                sudo unlink default
+                                sudo cd ../
+
+                                sudo cd /var/www/
+
+                                sudo mkdir packer.local
+                                sudo cd packer.local
+
+                                sudo mv /tmp/index.html /var/www/packer.local/
+
+                                sudo systemctl reload nginx 
+                                EOF
+                                tags = {
+                                  Name = "path-to-packer-frontend"
+                                }
 
   provisioner "file" {
     source = "./index.html"
