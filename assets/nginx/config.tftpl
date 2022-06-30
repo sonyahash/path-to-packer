@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo useradd -m -s /bin/bash ${name}
+
 sudo cd /etc/nginx/sites-enabled 
 sudo unlink default
 sudo cd ../
