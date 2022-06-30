@@ -15,7 +15,7 @@ terraform {
   required_version = ">= 0.14.5"
 
   cloud {
-    organization = "hashicorp-jennawong"
+    organization = "path-to-packer"
     workspaces {
       tags = ["path-to-packer"]
     }
