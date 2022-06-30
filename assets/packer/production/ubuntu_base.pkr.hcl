@@ -72,7 +72,7 @@ build {
   provisioner "shell" {
     inline = [
       //sudo useradd -m -s /bin/bash ${name}
-      "sudo su"
+      "sudo su",
       "cd /etc/nginx/sites-enabled",
       "unlink default",
       "cd ../",
