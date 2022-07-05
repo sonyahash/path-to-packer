@@ -6,9 +6,8 @@ sudo cd ../
 
 sudo cd /var/www/
 
-sudo mkdir packer.local
-sudo cd packer.local
-
-sudo mv /tmp/index.html /var/www/packer.local/
+sudo mv /tmp/index.html /var/www/
+sudo mv /tmp/logo.png /var/www/
+sudo mv /tmp/under-construction.gif /var/www/
 
 sudo systemctl reload nginx 
