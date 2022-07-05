@@ -46,7 +46,7 @@ build {
   ## HashiCups
   # Add startup script that will run path to packer on instance boot
   provisioner "file" {
-    source      = "../scripts/setup-deps-path-to-packer.sh"
+    source      = "../production/setup-deps-path-to-packer.sh"
     destination = "/tmp/setup-deps-path-to-packer.sh"
   }
 
@@ -66,6 +66,24 @@ build {
       "sudo apt-get install -y nginx",
       "sudo systemctl start nginx",
       "sudo apt-get install tree"
+    ]
+  }
+
+  provisioner "shell" {
+    inline = [
+      "sudo su -",
+      "cd /etc/nginx/sites-enabled",
+      "unlink default",
+      "cd ../",
+
+      "cd /var/www/",
+
+      "mkdir packer.local",
+      "cd packer.local",
+
+      "mv /tmp/index.html /var/www/packer.local/",
+
+      "systemctl reload nginx"
     ]
   }
 }

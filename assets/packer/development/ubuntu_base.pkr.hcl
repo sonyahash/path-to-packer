@@ -46,7 +46,7 @@ build {
   ## HashiCups
   # Add startup script that will run path to packer on instance boot
   provisioner "file" {
-    source      = "../scripts/setup-deps-path-to-packer.sh"
+    source      = "../production/setup-deps-path-to-packer.sh"
     destination = "/tmp/setup-deps-path-to-packer.sh"
   }
 

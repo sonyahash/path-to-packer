@@ -27,5 +27,8 @@ variable "hcp_channel" {
   default     = "production"
 }
 
-
+variable "user_name" {
+  description = "The user creating the infrastructure"
+  default = "terraform"
+}
 
