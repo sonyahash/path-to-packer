@@ -68,22 +68,4 @@ build {
       "sudo apt-get install tree"
     ]
   }
-
-  provisioner "shell" {
-    inline = [
-      "sudo su -",
-      "cd /etc/nginx/sites-enabled",
-      "unlink default",
-      "cd ../",
-
-      "cd /var/www/",
-
-      "mkdir packer.local",
-      "cd packer.local",
-
-      "mv /tmp/index.html /var/www/packer.local/",
-
-      "systemctl reload nginx"
-    ]
-  }
 }
