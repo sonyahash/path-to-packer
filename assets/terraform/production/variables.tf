@@ -26,9 +26,3 @@ variable "hcp_channel" {
   description = "HCP Packer channel name"
   default     = "production"
 }
-
-variable "user_name" {
-  description = "The user creating the infrastructure"
-  default = "terraform"
-}
-
