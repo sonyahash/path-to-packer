@@ -66,7 +66,7 @@ resource "aws_instance" "path-to-packer_frontend" {
   }
 
   provisioner "file" {
-    source = "/nginx/logo.png"
+    source = "./logo.png"
     destination = "/tmp/logo.png"
 
     connection {
@@ -78,7 +78,7 @@ resource "aws_instance" "path-to-packer_frontend" {
   }
 
   provisioner "file" {
-    source = "/nginx/under-construction.gif"
+    source = "./under-construction.gif"
     destination = "/tmp/under-construction.gif"
 
     connection {
