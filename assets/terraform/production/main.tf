@@ -15,7 +15,7 @@ terraform {
   required_version = ">= 0.14.5"
 
   cloud {
-    organization = "hashicorp-jennawong"
+    organization = "path-to-packer"
     workspaces {
       tags = ["path-to-packer"]
     }
@@ -45,11 +45,38 @@ resource "aws_instance" "path-to-packer_frontend" {
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.subnet_public.id
   vpc_security_group_ids      = [aws_security_group.sg_22_80_443.id]
+  key_name                    = aws_key_pair.path-to-packer.key_name
   associate_public_ip_address = true
+  user_data                   = "${file("script.sh")}"
 
   tags = {
     Name = "path-to-packer-frontend"
   }
+
+  provisioner "file" {
+    source = "./index.html"
+    destination = "/tmp/index.html"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = tls_private_key.path2packer.private_key_pem
+      host        = aws_instance.path-to-packer_frontend.public_ip
+    }
+  }
+}
+
+resource "tls_private_key" "path2packer" {
+  algorithm = "RSA"
+}
+
+locals {
+  private_key_filename = "packer-ssh-key.pem"
+}
+
+resource "aws_key_pair" "path-to-packer" {
+  key_name   = local.private_key_filename
+  public_key = tls_private_key.path2packer.public_key_openssh
 }
 
 resource "aws_vpc" "vpc" {
@@ -118,3 +145,5 @@ resource "aws_security_group" "sg_22_80_443" {
 output "app_url" {
   value = "http://${aws_instance.path-to-packer_frontend.public_ip}"
 }
+
+
