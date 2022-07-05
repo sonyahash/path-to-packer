@@ -64,6 +64,16 @@ resource "aws_instance" "path-to-packer_frontend" {
       host        = aws_instance.path-to-packer_frontend.public_ip
     }
   }
+
+  provisioner "file" {
+    source = "/nginx/logo.png"
+    destination = "/tmp/logo.png"
+  }
+
+  provisioner "file" {
+    source = "/nginx/under-construction.gif"
+    destination = "/tmp/under-construction.gif"
+  }
 }
 
 resource "tls_private_key" "path2packer" {
