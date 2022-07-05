@@ -65,29 +65,29 @@ resource "aws_instance" "path-to-packer_frontend" {
     }
   }
 
-  provisioner "file" {
-    source = "./logo.png"
-    destination = "/tmp/logo.png"
+  # provisioner "file" {
+  #   source = "./logo.png"
+  #   destination = "/tmp/logo.png"
 
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = tls_private_key.path2packer.private_key_pem
-      host        = aws_instance.path-to-packer_frontend.public_ip
-    }
-  }
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ubuntu"
+  #     private_key = tls_private_key.path2packer.private_key_pem
+  #     host        = aws_instance.path-to-packer_frontend.public_ip
+  #   }
+  # }
 
-  provisioner "file" {
-    source = "./under-construction.gif"
-    destination = "/tmp/under-construction.gif"
+  # provisioner "file" {
+  #   source = "./under-construction.gif"
+  #   destination = "/tmp/under-construction.gif"
 
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = tls_private_key.path2packer.private_key_pem
-      host        = aws_instance.path-to-packer_frontend.public_ip
-    }
-  }
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "ubuntu"
+  #     private_key = tls_private_key.path2packer.private_key_pem
+  #     host        = aws_instance.path-to-packer_frontend.public_ip
+  #   }
+  # }
 }
 
 resource "tls_private_key" "path2packer" {
