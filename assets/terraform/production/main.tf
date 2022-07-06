@@ -14,12 +14,12 @@ terraform {
   }
   required_version = ">= 0.14.5"
 
-  cloud {
-    organization = "path-to-packer"
-    workspaces {
-      tags = ["path-to-packer"]
-    }
-  }
+  # cloud {
+  #   organization = "path-to-packer"
+  #   workspaces {
+  #     tags = ["path-to-packer"]
+  #   }
+  # }
 }
 
 provider "hcp" {}
