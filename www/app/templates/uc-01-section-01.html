@@ -26,18 +26,21 @@
             <ol> 
                 <li>Create a new instance by using the Amazon EC2 </li>
                     <ol type="a">
-                        <li>Under the AMI, select Ubuntu 20.04 LTS in the Quick Start section</li> 
-                        <li>Make sure to create a Key pair</li>
-                        <li>Under Network Settings, find the Firewall section & click “create security group”</li>
-                
+                        <li>In your AWS environment click “Instances” → “Launch Instances” (the orange button)</li> 
+                        <li>Give your instance a name under the “Names and tags”</li>
+                        <li>Under the “Application and OS Images (Amazon Machine Image), select “Ubuntu Server 20.04 LTS (HVM), SSD Volume Type” </li>
+                        <li>Choose the instance type you want (i.e. t2.micro)</li>
+                        <li>Create a key pair</li>
+                        <li>Under Network Settings, find the Firewall section and click “create security group”</li>
                 
                             <ol type="i">
                                 <li>Check all three boxes to create rules for SSH, HTTPs & HTTP traffic</li>
                             </ol>
                             <img src="{{ url_for('static', filename='img/step-1.svg') }}" alt="Vault">
 
-                        <li>Use default settings for everything else and then click “Launch instance”</li> 
-                        <li>Connect the Instance to the Ubuntu server by clicking on “Connect” that is located in the Instance summary</li> 
+                        <li>For the “Configure storage,” “Advanced details,” and “Summary” sections, use the default settings </li> 
+                        <li>Click “Launch instance” at the bottom of the page</li> 
+                        <li>Connect to the instance by clicking on the Instance ID → “Connect” → “Connect”</li>
                     </ol>
             </ol>
         </div>
