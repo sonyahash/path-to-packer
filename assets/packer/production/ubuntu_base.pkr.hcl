@@ -29,7 +29,7 @@ source "amazon-ebs" "ubuntu-server-east" {
 }
 
 build {
-  hcp_packer_registry {
+    hcp_packer_registry {
     bucket_name   = "path-to-packer-frontend-ubuntu"
     description   = "Path to Packer Demo"
     bucket_labels = var.aws_tags
@@ -43,7 +43,6 @@ build {
     "source.amazon-ebs.ubuntu-server-east"
   ]
 
-  ## HashiCups
   # Add startup script that will run path to packer on instance boot
   provisioner "file" {
     source      = "../production/setup-deps-path-to-packer.sh"
@@ -66,24 +65,6 @@ build {
       "sudo apt-get install -y nginx",
       "sudo systemctl start nginx",
       "sudo apt-get install tree"
-    ]
-  }
-
-  provisioner "shell" {
-    inline = [
-      "sudo su -",
-      "cd /etc/nginx/sites-enabled",
-      "unlink default",
-      "cd ../",
-
-      "cd /var/www/",
-
-      "mkdir packer.local",
-      "cd packer.local",
-
-      "mv /tmp/index.html /var/www/packer.local/",
-
-      "systemctl reload nginx"
     ]
   }
 }
