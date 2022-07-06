@@ -24,5 +24,5 @@ variable "hcp_bucket_ubuntu" {
 
 variable "hcp_channel" {
   description = "HCP Packer channel name"
-  default     = "production"
+  default     = "path-to-packer-development"
 }
