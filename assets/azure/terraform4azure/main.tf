@@ -7,13 +7,13 @@ terraform {
   }
 
   cloud {
-    organization = "{ORG_NAME}"
+    organization = "hashicorp-patricia"
     workspaces {
       name = "path-to-packer-azure"
     }
   }
 }
-}
+
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
