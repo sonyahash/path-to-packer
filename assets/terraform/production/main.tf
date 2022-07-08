@@ -15,9 +15,9 @@ terraform {
   required_version = ">= 0.14.5"
 
   cloud {
-    organization = "path-to-packer"
+    organization = "{ORG_NAME}"
     workspaces {
-      tags = ["path-to-packer"]
+      name = "path-to-packer"
     }
   }
 }
