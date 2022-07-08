@@ -5,6 +5,14 @@ terraform {
       version = "=3.0.0"
     }
   }
+
+  cloud {
+    organization = "{ORG_NAME}"
+    workspaces {
+      name = "path-to-packer-azure"
+    }
+  }
+}
 }
 
 # Configure the Microsoft Azure Provider
