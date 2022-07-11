@@ -7,7 +7,7 @@ terraform {
   }
 
   cloud {
-    organization = "hashicorp-patricia"
+    organization = "<ORG_NAME>"
     workspaces {
       name = "path-to-packer-azure"
     }
@@ -90,6 +90,7 @@ resource "azurerm_public_ip" "main" {
   tags = {
     environment = "Production"
   }
+  domain_name_label   = "path-to-packer-YOUR_NAME"
 }
 
 # Create network interface
@@ -112,7 +113,7 @@ resource "azurerm_virtual_machine" "myVM" {
   location                         = data.azurerm_resource_group.main.location
   resource_group_name              = data.azurerm_resource_group.main.name
   network_interface_ids            = ["${azurerm_network_interface.main.id}"]
-  vm_size                          = "Standard_D2as_v5"
+  vm_size                          = "Standard_DS1_V2"
   delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true
 
@@ -140,5 +141,37 @@ resource "azurerm_virtual_machine" "myVM" {
   
   tags = {
     environment = "Production"
+  }
+
+  provisioner "file" {
+        source      = "./index.html"
+        destination = "/tmp/index.html"
+        connection {
+            type     = "ssh"
+            # user     = var.admin_username
+            # password = var.admin_password
+            user     = "devopsadmin"
+            password = "Cssladmin#2019"
+            host     = azurerm_public_ip.main.fqdn
+        }
+    }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo cd /etc/nginx/sites-enabled",
+      "sudo unlink default",
+      "sudo cd ../",
+      "sudo cd /var/www/",
+      "sudo mv /tmp/index.html /var/www/html/",
+      "sudo systemctl reload nginx"
+    ]
+    connection {
+      type     = "ssh"
+      # user     = var.admin_username
+      # password = var.admin_password
+      user     = "devopsadmin"
+      password = "Cssladmin#2019"
+      host     = azurerm_public_ip.main.fqdn
+    }
   }
 }

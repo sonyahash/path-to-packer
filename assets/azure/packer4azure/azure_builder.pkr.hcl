@@ -23,7 +23,7 @@ source "azure-arm" "ubuntu" {
   managed_image_name                = "myPackerImage"
   managed_image_resource_group_name = "path-to-packer"
   os_type                           = "Linux"
-  vm_size                           = "Standard_D2as_v5"
+  vm_size                           = "Standard_DS1_V2"
 }
 
 build {
