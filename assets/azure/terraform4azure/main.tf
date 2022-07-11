@@ -145,7 +145,7 @@ resource "azurerm_virtual_machine" "myVM" {
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
-}
+  }
 
   os_profile {
     computer_name  = var.prefix
@@ -162,15 +162,15 @@ resource "azurerm_virtual_machine" "myVM" {
   }
 
   provisioner "file" {
-        source      = "./index.html"
-        destination = "/tmp/index.html"
-        connection {
-            type     = "ssh"
-            user     = var.admin_username
-            password = var.admin_password
-            host     = azurerm_public_ip.main.fqdn
-        }
+    source      = "./index.html"
+    destination = "/tmp/index.html"
+    connection {
+      type     = "ssh"
+      user     = var.admin_username
+      password = var.admin_password
+      host     = azurerm_public_ip.main.fqdn
     }
+  }
 
   provisioner "remote-exec" {
     inline = [
