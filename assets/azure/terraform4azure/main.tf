@@ -175,3 +175,6 @@ resource "azurerm_virtual_machine" "myVM" {
     }
   }
 }
+output "app_url" {
+    value = "http://${azurerm_public_ip.main.fqdn}"
+  }
