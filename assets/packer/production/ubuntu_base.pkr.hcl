@@ -43,20 +43,6 @@ build {
     "source.amazon-ebs.ubuntu-server-east"
   ]
 
-  # Add startup script that will run path to packer on instance boot
-  provisioner "file" {
-    source      = "../production/setup-deps-path-to-packer.sh"
-    destination = "/tmp/setup-deps-path-to-packer.sh"
-  }
-
-  # Move temp files to actual destination
-  # Must use this method because their destinations are protected
-  provisioner "shell" {
-    inline = [
-      "sudo cp /tmp/setup-deps-path-to-packer.sh /var/lib/cloud/scripts/per-boot/setup-deps-path-to-packer.sh",
-    ]
-  }
-
   provisioner "shell" {
     inline = [
       "sleep 30",
