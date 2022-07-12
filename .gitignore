@@ -3,29 +3,6 @@
 .DS_Store
 .DS_Store?
 
-# Any test files #
-##################
-test*
-
-# The Affinty Designer files #
-# Those are not practically  #
-# required. If you want them #
-# please just ask.           #
-##############################
-*.afdesign
-
-# Local data files that may  #
-# contain sensitive info.    #
-##############################
-test_data
-
-# Although this is transient,  #
-# it should not be here. It is #
-# need in development but must #
-# not be shared.               #
-################################
-vault-unseal.json
-
 # Ignore all certificate files.#
 ################################
 *.crt
@@ -60,12 +37,26 @@ nohup.out
 #########################
 *.tfstate
 *.tfstate.backup
+*.tfstate.*
 
 # Terraform provider files #
 ###########################
 .terraform
 .terraform.lock.hcl
 terraform-branch*
+
+# Local .terraform directories #
+################################
+**/.terraform/*
+
+# .tfvars files #
+################
+*.tfvars
+
+# terraformrc file #
+####################
+.terraformrc
+terraform.rc
 
 # deprecated items in dev #
 ###########################

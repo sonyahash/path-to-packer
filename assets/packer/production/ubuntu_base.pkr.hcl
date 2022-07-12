@@ -31,7 +31,7 @@ source "amazon-ebs" "ubuntu-server-east" {
 build {
     hcp_packer_registry {
     bucket_name   = "path-to-packer-frontend-ubuntu"
-    description   = "Path to Packer Demo"
+    description   = "Path to Packer Demo on AWS!"
     bucket_labels = var.aws_tags
     build_labels = {
       "build-time"   = timestamp(),
