@@ -1,21 +1,20 @@
-variable "subscription_id" {
-  type    = string
-  default = "<SUBSCRIPTION_ID>"
-}
-
 variable "client_id" {
   type    = string
   default = "<CLIENT_ID>"
+}
+
+variable "tenant_id" {
+  type    = string
+  default = "<TENANT_ID>"
 }
 
 variable "client_secret" {
   type    = string
   default = "<CLIENT_SECRET>"
 }
-
-variable "tenant_id" {
+variable "subscription_id" {
   type    = string
-  default = "<TENANT_ID>"
+  default = "<SUBSCRIPTION_ID>"
 }
 
 variable "location" {

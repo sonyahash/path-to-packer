@@ -9,14 +9,14 @@ variable "prefix" {
   default = "<YOUR_NAME>"
 }
 
-variable "subscription_id" {
-  description = "This is the subscription id that the azure cli will provide you with."
-  default = "<SUBSCRIPTION_ID"
-}
-
 variable "client_id" {
   description = "This is the client id that the azure cli will provide you with."
   default = "<CLIENT_ID>"
+}
+
+variable "tenant_id" {
+  description = "This is the tenant id that the azure cli will provide you with."
+  default = "<TENANT_ID>"
 }
 
 variable "client_secret" {
@@ -24,9 +24,9 @@ variable "client_secret" {
   default = "<CLIENT_SECRET>"
 }
 
-variable "tenant_id" {
-  description = "This is the tenant id that the azure cli will provide you with."
-  default = "<TENANT_ID>"
+variable "subscription_id" {
+  description = "This is the subscription id that the azure cli will provide you with."
+  default = "<SUBSCRIPTION_ID>"
 }
 
 variable "location" {

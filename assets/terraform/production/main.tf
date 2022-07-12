@@ -142,7 +142,7 @@ resource "aws_security_group" "sg_22_80_443" {
   }
 }
 
-output "app_url" {
+output "your_app_url" {
   value = "http://${aws_instance.path-to-packer_frontend.public_ip}"
 }
 

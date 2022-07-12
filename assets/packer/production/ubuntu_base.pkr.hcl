@@ -31,7 +31,7 @@ source "amazon-ebs" "ubuntu-server-east" {
 build {
     hcp_packer_registry {
     bucket_name   = "path-to-packer-frontend-ubuntu"
-    description   = "Path to Packer Demo"
+    description   = "Path to Packer Demo on AWS!"
     bucket_labels = var.aws_tags
     build_labels = {
       "build-time"   = timestamp(),
@@ -42,6 +42,20 @@ build {
   sources = [
     "source.amazon-ebs.ubuntu-server-east"
   ]
+
+  # Add startup script that will run path to packer on instance boot
+  provisioner "file" {
+    source      = "../production/setup-deps-path-to-packer.sh"
+    destination = "/tmp/setup-deps-path-to-packer.sh"
+  }
+
+  # Move temp files to actual destination
+  # Must use this method because their destinations are protected
+  provisioner "shell" {
+    inline = [
+      "sudo cp /tmp/setup-deps-path-to-packer.sh /var/lib/cloud/scripts/per-boot/setup-deps-path-to-packer.sh",
+    ]
+  }
 
   provisioner "shell" {
     inline = [
