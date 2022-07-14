@@ -24,5 +24,5 @@ variable "hcp_bucket_ubuntu" {
 
 variable "hcp_channel" {
   description = "HCP Packer channel name"
-  default     = "path-to-packer-aws"
+  default     = "path-to-packer-aws-channel"
 }
