@@ -1,3 +1,11 @@
+#########################################################
+# Just a heads up this file is CURRENTLY IDENTICAL to the 
+# earlier file you used to deploy your instance in AWS.
+#
+# You will need to edit a lot of this file for it to
+# now work in Azure
+#########################################################
+
 packer {
   required_plugins {
     azure = {
@@ -7,48 +15,64 @@ packer {
   }
 }
 
-source "azure-arm" "ubuntu" {
-  azure_tags = {
-    dept = "Engineering"
-    task = "Image deployment"
+data "amazon-ami" "ubuntu-server-east" {
+  region = var.region
+  filters = {
+    name                = var.image_name
+    root-device-type    = "ebs"
+    virtualization-type = "hvm"
   }
-  subscription_id                   = var.subscription_id
-  client_id                         = var.client_id
-  client_secret                     = var.client_secret
-  tenant_id                         = var.tenant_id
-  image_offer                       = "UbuntuServer"
-  image_publisher                   = "Canonical"
-  image_sku                         = "16.04-LTS"
-  location                          = var.location
-  managed_image_name                = "myPackerImage"
-  managed_image_resource_group_name = "path-to-packer"
-  os_type                           = "Linux"
-  vm_size                           = var.vm_size
+  most_recent = true
+  owners      = ["099720109477"]
+}
+
+source "amazon-ebs" "ubuntu-server-east" {
+  region         = var.region
+  source_ami     = data.amazon-ami.ubuntu-server-east.id
+  instance_type  = "t2.small"
+  ssh_username   = "ubuntu"
+  ssh_agent_auth = false
+  ami_name       = "path-to-packer{{timestamp}}_v${var.version}"
+  tags           = var.aws_tags
 }
 
 build {
-  sources = ["source.azure-arm.ubuntu"]
-
-  provisioner "shell" {
-    execute_command = "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'"
-    inline          = [
-                        "sudo apt-get update",
-                        "sudo apt-get upgrade -y", 
-                        "sudo apt-get -y install nginx", 
-                        "sudo /usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
-    ]
-    inline_shebang  = "/bin/sh -x"
-  }
-
-  hcp_packer_registry {
-    bucket_name = "path-to-packer-azure"
-    description = "Path to Packer Demo on Azure!"
-    bucket_labels = var.azure_tags
+    hcp_packer_registry {
+    bucket_name   = "path-to-packer-frontend-ubuntu"
+    description   = "Path to Packer Demo on AWS!"
+    bucket_labels = var.aws_tags
     build_labels = {
-      "team"         = "SE Interns"
       "build-time"   = timestamp(),
       "build-source" = basename(path.cwd)
     }
   }
-  
+
+  sources = [
+    "source.amazon-ebs.ubuntu-server-east"
+  ]
+
+  # Add startup script that will run path to packer on instance boot
+  provisioner "file" {
+    source      = "../production/setup-deps-path-to-packer.sh"
+    destination = "/tmp/setup-deps-path-to-packer.sh"
+  }
+
+  # Move temp files to actual destination
+  # Must use this method because their destinations are protected
+  provisioner "shell" {
+    inline = [
+      "sudo cp /tmp/setup-deps-path-to-packer.sh /var/lib/cloud/scripts/per-boot/setup-deps-path-to-packer.sh",
+    ]
+  }
+
+  provisioner "shell" {
+    inline = [
+      "sleep 30",
+      "sudo apt-get update",
+      "sudo apt-get upgrade -y",
+      "sudo apt-get install -y nginx",
+      "sudo systemctl start nginx",
+      "sudo apt-get install tree"
+    ]
+  }
 }
