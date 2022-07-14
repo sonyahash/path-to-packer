@@ -6,6 +6,8 @@ terraform {
     }
   }
 
+  required_version = ">= 0.14.5"
+
   cloud {
     organization = "<ORG_NAME>"
     workspaces {
@@ -41,89 +43,6 @@ data "azurerm_image" "main" {
 
 output "image_id" {
   value = "/subscriptions/${var.subscription_id}/resourceGroups/RG-EASTUS-SPT-PLATFORM/providers/Microsoft.Compute/images/myPackerImage"
-}
-
-# Create a Network Security Group with some rules
-resource "azurerm_network_security_group" "main" {
-  name                = "${var.prefix}-sg"
-  location            = var.location
-  resource_group_name = data.azurerm_resource_group.main.name
-
-  security_rule {
-    name                       = "HTTP"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "80"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "HTTPS"
-    priority                   = 102
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "443"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "SSH"
-    priority                   = 101
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-  
-}
-
-# Create virtual network
-resource "azurerm_virtual_network" "main" {
-  name                = "${var.prefix}-vnet"
-  address_space       = [var.address_space]
-  location            = var.location
-  resource_group_name = data.azurerm_resource_group.main.name
-}
-
-# Create subnet
-resource "azurerm_subnet" "main" {
-  name                 = "${var.prefix}-subnet"
-  resource_group_name  = data.azurerm_resource_group.main.name
-  virtual_network_name = azurerm_virtual_network.main.name
-  address_prefixes     = [var.subnet_prefix]
-}
-
-# Create public IP
-resource "azurerm_public_ip" "main" {
-  name                = "${var.prefix}-ip"
-  resource_group_name = data.azurerm_resource_group.main.name
-  location            = var.location
-  allocation_method   = "Static"
-  domain_name_label   = "path-to-packer-${var.prefix}"
-}
-
-# Create network interface
-resource "azurerm_network_interface" "main" {
-  name                = "${var.prefix}-nic"
-  location            = var.location
-  resource_group_name = data.azurerm_resource_group.main.name
-
-  ip_configuration {
-    name                          = "${var.prefix}-ipconfig"
-    subnet_id                     = azurerm_subnet.main.id
-    private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.main.id
-  }
 }
 
 # Create a new Virtual Machine based on the custom Image
@@ -188,6 +107,88 @@ resource "azurerm_virtual_machine" "myVM" {
       host     = azurerm_public_ip.main.fqdn
     }
   }
+}
+
+# Create virtual network
+resource "azurerm_virtual_network" "main" {
+  name                = "${var.prefix}-vnet"
+  address_space       = [var.address_space]
+  location            = var.location
+  resource_group_name = data.azurerm_resource_group.main.name
+}
+
+# Create subnet
+resource "azurerm_subnet" "main" {
+  name                 = "${var.prefix}-subnet"
+  resource_group_name  = data.azurerm_resource_group.main.name
+  virtual_network_name = azurerm_virtual_network.main.name
+  address_prefixes     = [var.subnet_prefix]
+}
+
+# Create public IP
+resource "azurerm_public_ip" "main" {
+  name                = "${var.prefix}-ip"
+  resource_group_name = data.azurerm_resource_group.main.name
+  location            = var.location
+  allocation_method   = "Static"
+  domain_name_label   = "path-to-packer-${var.prefix}"
+}
+
+# Create network interface
+resource "azurerm_network_interface" "main" {
+  name                = "${var.prefix}-nic"
+  location            = var.location
+  resource_group_name = data.azurerm_resource_group.main.name
+
+  ip_configuration {
+    name                          = "${var.prefix}-ipconfig"
+    subnet_id                     = azurerm_subnet.main.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.main.id
+  }
+}
+
+# Create a Network Security Group with some rules
+resource "azurerm_network_security_group" "main" {
+  name                = "${var.prefix}-sg"
+  location            = var.location
+  resource_group_name = data.azurerm_resource_group.main.name
+
+  security_rule {
+    name                       = "HTTP"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "HTTPS"
+    priority                   = 102
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "SSH"
+    priority                   = 101
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }  
 }
 
 output "your_app_url" {

@@ -28,7 +28,7 @@ source "azure-arm" "ubuntu" {
 
 build {
   hcp_packer_registry {
-    bucket_name = "path-to-packer-azure"
+    bucket_name = "path-to-packer"
     description = "Path to Packer Demo on Azure!"
     bucket_labels = var.azure_tags
     build_labels = {
