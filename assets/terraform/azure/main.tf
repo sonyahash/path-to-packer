@@ -16,6 +16,18 @@ terraform {
   }
 }
 
+data "hcp_packer_iteration" "ubuntu" {
+  bucket_name = var.hcp_bucket_ubuntu
+  channel     = var.hcp_channel
+}
+
+data "hcp_packer_image" "ubuntu" {
+  bucket_name    = data.hcp_packer_iteration.ubuntu.bucket_name
+  iteration_id   = data.hcp_packer_iteration.ubuntu.ulid
+  cloud_provider = "azurerm"
+  region         = var.location
+}
+
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   subscription_id = var.subscription_id
