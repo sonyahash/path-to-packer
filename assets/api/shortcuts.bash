@@ -5,8 +5,8 @@ export HCP_PACKER_BASE_URL=https://api.cloud.hashicorp.com/packer/2021-04-30/org
 
 # Specific to this exercise
 export HCP_PACKER_BUCKET_SLUG="path-to-packer"
-export HCP_PACKER_CHANNEL_SLUG="path-to-packer-aws"
-export HCP_PACKER_CHANNEL_SLUG2="path-to-packer-azure"
+export HCP_PACKER_CHANNEL_SLUG="path-to-packer-aws-channel"
+export HCP_PACKER_CHANNEL_SLUG2="path-to-packer-azure-channel"
 
 export HCP_PACKER_API_GET_REGISTRY=${HCP_PACKER_BASE_URL}/registry
 export HCP_PACKER_API_CREATE_CHANNEL=${HCP_PACKER_BASE_URL}/images/${HCP_PACKER_BUCKET_SLUG}/channels
