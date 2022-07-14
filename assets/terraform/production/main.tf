@@ -1,6 +1,5 @@
 terraform {
   required_providers {
-
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.16"
@@ -10,8 +9,8 @@ terraform {
       source  = "hashicorp/hcp"
       version = "0.17.0"
     }
-
   }
+
   required_version = ">= 0.14.5"
 
   cloud {
@@ -145,5 +144,3 @@ resource "aws_security_group" "sg_22_80_443" {
 output "your_app_url" {
   value = "http://${aws_instance.path-to-packer_frontend.public_ip}"
 }
-
-
