@@ -42,17 +42,6 @@ build {
     "source.azure-arm.ubuntu"
   ]
 
-  // provisioner "shell" {
-  //   execute_command = "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'"
-  //   inline          = [
-  //                       "sudo apt-get update",
-  //                       "sudo apt-get upgrade -y", 
-  //                       "sudo apt-get -y install nginx", 
-  //                       "sudo /usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
-  //   ]
-  //   inline_shebang  = "/bin/sh -x"
-  // }
-
   provisioner "shell" {
     inline = [
       "sleep 30",
