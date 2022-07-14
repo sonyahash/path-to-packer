@@ -1,3 +1,7 @@
+#####################################################
+# These are the AWS Specific Variables
+#####################################################
+
 variable "region" {
   type    = string
   default = "us-east-2"
@@ -32,5 +36,49 @@ variable "aws_tags" {
     "Owner"       = "Production"
     "OS"          = "Ubuntu"
     "Version"     = "Focal 20.04"
+  }
+}
+
+#####################################################
+# These are the Azure Specific Variables
+#####################################################
+
+variable "client_id" {
+  type    = string
+  default = "<CLIENT_ID>"
+}
+
+variable "tenant_id" {
+  type    = string
+  default = "<TENANT_ID>"
+}
+
+variable "client_secret" {
+  type    = string
+  default = "<CLIENT_SECRET>"
+}
+variable "subscription_id" {
+  type    = string
+  default = "<SUBSCRIPTION_ID>"
+}
+
+variable "location" {
+  type    = string
+  default = "centralus"
+}
+
+variable "vm_size" {
+  type    = string
+  default = "Standard_DS1_V2"
+}
+
+variable "azure_tags" {
+  type = map(string)
+  default = {
+    "Name"        = "path-to-packer"
+    "Environment" = "HashiCorp Demo"
+    "Developer"   = "Path to Packer Interns"
+    "OS"          = "Ubuntu"
+    "Version"     = "Canonical 16.04"
   }
 }
