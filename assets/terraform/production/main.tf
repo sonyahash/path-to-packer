@@ -11,8 +11,6 @@ terraform {
     }
   }
 
-  required_version = ">= 0.14.5"
-
   cloud {
     organization = "<ORG_NAME>"
     workspaces {
