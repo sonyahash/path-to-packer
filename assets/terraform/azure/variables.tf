@@ -58,3 +58,13 @@ variable "admin_password" {
   description = "Administrator password for linux and mysql"
   default     = "Password123!"
 }
+
+variable "hcp_bucket_ubuntu" {
+  description = "The Bucket where our AMI is listed."
+  default     = "path-to-packer"
+}
+
+variable "hcp_channel" {
+  description = "HCP Packer channel name"
+  default     = "path-to-packer-production"
+}
