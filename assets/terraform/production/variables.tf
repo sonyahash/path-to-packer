@@ -19,7 +19,7 @@ variable "region" {
 
 variable "hcp_bucket_ubuntu" {
   description = "The Bucket where our AMI is listed."
-  default     = "path-to-packer-frontend-ubuntu"
+  default     = "path-to-packer"
 }
 
 variable "hcp_channel" {
