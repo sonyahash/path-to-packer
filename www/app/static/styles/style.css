@@ -28,9 +28,10 @@
     --pretty-box-border: 10px 10px 0 0;
     --pretty-box-width: 300px;
 
-    /* Instruqt Window View at 1920 x 1080 viewport*/
-    --instruqt-view-width: 1200px;
-    --instruqt-view-height: 860px;
+    /* Instruqt Window View at 1920 x 1080 viewport*/ 
+    /*CHANGED HERE!!!!!!!!!!!!!!!!*/
+    --instruqt-view-width: auto;
+    --instruqt-view-height: auto;
 }
 
 
