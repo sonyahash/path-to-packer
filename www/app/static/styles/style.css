@@ -138,10 +138,8 @@ a {
 }
 
 .explainer {
-    /* padding: 20px;
-    width: 400px; */
-    padding: auto;
-    width: auto;
+    padding: 20px;
+    width: 400px;
     opacity: 0;
     animation: fadeInUp 3s ease forwards;
     animation-delay: calc(var(--splash-delay) * 100ms);
