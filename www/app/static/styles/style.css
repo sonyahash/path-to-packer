@@ -30,8 +30,8 @@
 
     /* Instruqt Window View at 1920 x 1080 viewport*/ 
     /*CHANGED HERE!!!!!!!!!!!!!!!!*/
-    --instruqt-view-width: auto;
-    --instruqt-view-height: auto;
+    --instruqt-view-width: 1200px;
+    --instruqt-view-height: 860px;
 }
 
 
